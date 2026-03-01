@@ -1,11 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, MicOff, Mic } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { getBookBySlug } from "@/lib/actions/book.actions";
 import VapiControls from "@/components/VapiControls";
+import PdfReader from "@/components/PdfReader";
 
 export default async function BookDetailsPage({
   params,
@@ -33,7 +33,10 @@ export default async function BookDetailsPage({
         <ArrowLeft className="size-6 text-[#212a3b]" />
       </Link>
 
-      <VapiControls book={book} />
+      <div className="max-w-5xl mx-auto flex flex-col gap-6">
+        <VapiControls book={book} />
+        <PdfReader fileUrl={book.fileURL} title={book.title} />
+      </div>
     </div>
   );
 }
